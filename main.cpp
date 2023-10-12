@@ -9,6 +9,7 @@ int main() {
     std::cout.tie(0);
 
     // MAIN LOGIC
+    // Testing of file merge
 
     return 0;
 }
