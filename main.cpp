@@ -9,7 +9,7 @@ int main() {
     std::cout.tie(0);
 
     // MAIN LOGIC
-
+    // version steys
     return 0;
 }
 
