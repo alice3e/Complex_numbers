@@ -9,6 +9,8 @@ int main() {
     std::cout.tie(0);
 
     // MAIN LOGIC
+    // Testing of file merge
+
     // version steys
     return 0;
 }
