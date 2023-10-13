@@ -12,4 +12,5 @@ int main() {
     std::cout << y.Normal_form() << std::endl;
     std::cout << (x+y).Normal_form() << std::endl;
     std::cout << (x-y).Normal_form() << std::endl;
+
 }

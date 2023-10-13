@@ -9,25 +9,30 @@ void Basic_operations::test_function() {
 
 // Эта функция будет автоматически вызываться при создании обьекта класса
 // В будущем можно сдесь различные проверки или автоматический перевод в Триг. форму сделать
-Basic_operations::Complex::Complex(int x, int y) {
+Basic_operations::Complex::Complex(double x, double y) {
     Rez = x;
     Imz = y;
+    // TODO: перевод в поляную систему доделать.
+    radius = sqrt( (pow(x,2) + pow(y,2) ) );
+
 }
 
-int Basic_operations::Complex::GetImz() const {
+double Basic_operations::Complex::GetImz() const {
     return Imz;
 }
 
-int Basic_operations::Complex::GetReZ() const {
+double Basic_operations::Complex::GetReZ() const {
     return Rez;
 }
 
 std::string Basic_operations::Complex::Normal_form() const {
     std::string out;
-    if(Imz > 0){
-        out += "(" + std::to_string(Rez) + " + " + std::to_string(Imz) + "i)";
+    double x = Rez,y = Imz;
+    // TODO: Сделать вывод числа без нулей если оно целое + округление до 3ех знаков
+    if(y > 0){
+        out += "(" + std::to_string(x) + " + " + std::to_string(y) + "i)";
     }else{
-        out += "(" + std::to_string(Rez) + " - " + std::to_string(Imz*-1) + "i)";
+        out += "(" + std::to_string(x) + " - " + std::to_string(y*-1) + "i)";
     }
     return out;
 }
