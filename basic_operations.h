@@ -1,11 +1,11 @@
-//
-// Created by alicee on 13.10.2023.
-//
 #pragma once
+
 #include <iostream>
-#include <string>
 #include <math.h>
-namespace Basic_operations{
+#include <string>
+
+
+namespace BasicOperations{
 
     class Complex{
     private:
@@ -30,7 +30,7 @@ namespace Basic_operations{
         Complex operator-(const Complex& x) const;
         Complex operator*(const Complex& x) const;
         Complex operator/(const Complex& x) const;
-        [[nodiscard]] Basic_operations::Complex pow(int n); // Возведение в степень x.pow(3) -> x^3
+        [[nodiscard]] BasicOperations::Complex pow(int n); // Возведение в степень x.pow(3) -> x^3
         Complex conjugate() const; // Комплексно сопряженное
     };
 }
