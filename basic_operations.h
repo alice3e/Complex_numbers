@@ -29,5 +29,7 @@ namespace Basic_operations{
         // Простейшие операции
         Complex operator+(const Complex& x) const;
         Complex operator-(const Complex& x) const;
+        Complex operator*(const Complex& x) const;
+        Complex operator/(const Complex& x) const;
     };
 }

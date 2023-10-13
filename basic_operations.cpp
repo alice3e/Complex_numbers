@@ -14,6 +14,8 @@ Basic_operations::Complex::Complex(double x, double y) {
     Imz = y;
     // TODO: перевод в поляную систему доделать.
     radius = sqrt( (pow(x,2) + pow(y,2) ) );
+    double sin_thetha = sin(radius/Rez);
+    double cos_thetha = sin(radius/Rez);
 
 }
 
@@ -28,6 +30,7 @@ double Basic_operations::Complex::GetReZ() const {
 std::string Basic_operations::Complex::Normal_form() const {
     std::string out;
     double x = Rez,y = Imz;
+
     // TODO: Сделать вывод числа без нулей если оно целое + округление до 3ех знаков
     if(y > 0){
         out += "(" + std::to_string(x) + " + " + std::to_string(y) + "i)";
@@ -43,4 +46,12 @@ Basic_operations::Complex Basic_operations::Complex::operator+(const Basic_opera
 
 Basic_operations::Complex Basic_operations::Complex::operator-(const Basic_operations::Complex &x) const {
     return Basic_operations::Complex{Rez-x.Rez,Imz-x.Imz};
+}
+
+Basic_operations::Complex Basic_operations::Complex::operator*(const Basic_operations::Complex &x) const {
+    return Basic_operations::Complex{  ((Rez*x.Rez) - (Imz * x.Imz))  ,  ( (Rez*x.Imz) + (Imz * x.Rez) )  };
+}
+Basic_operations::Complex Basic_operations::Complex::operator/(const Basic_operations::Complex &x) const {
+    double denominator = pow(x.Rez,2) + pow(x.Imz,2); // знаменатель с^2 + d^2
+    return Basic_operations::Complex{ (((Rez*x.Rez) + (Imz * x.Imz))/denominator) , ( ( (Imz * x.Rez) - (Rez*x.Imz) )/denominator) };
 }
