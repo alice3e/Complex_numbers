@@ -1,5 +1,3 @@
 # Complex_numbers
 
-Hello from @alice3e
-
-Commit from cloned proj
+Here we are trying to write a class for Complex numbers with basic operations and algorithms.
