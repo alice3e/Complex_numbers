@@ -6,7 +6,6 @@
 #include <string>
 #include <math.h>
 namespace Basic_operations{
-    void test_function();
 
     class Complex{
     private:

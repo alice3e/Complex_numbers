@@ -3,10 +3,6 @@
 //
 #include "basic_operations.h"
 
-void Basic_operations::test_function() {
-    std::cout << "Hello from namespace basic_operations" << std::endl;
-}
-
 // Эта функция будет автоматически вызываться при создании обьекта класса
 // В будущем можно сдесь различные проверки или автоматический перевод в Триг. форму сделать
 Basic_operations::Complex::Complex(double x, double y) {
@@ -31,7 +27,7 @@ std::string Basic_operations::Complex::Normal_form() const {
     std::string out;
     double x = Rez,y = Imz;
 
-    // TODO: Сделать вывод числа без нулей если оно целое + округление до 3ех знаков
+    // TODO: Сделать вывод числа без нулей если оно целое + округление до 3ех знаков(3 знака после запятой(если это не нули))
     if(y >= 0){
         out += "(" + std::to_string(x) + " + " + std::to_string(y) + "i)";
     }else{
