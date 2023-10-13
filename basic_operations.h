@@ -31,5 +31,6 @@ namespace Basic_operations{
         Complex operator-(const Complex& x) const;
         Complex operator*(const Complex& x) const;
         Complex operator/(const Complex& x) const;
+        [[nodiscard]] Complex pow(const Complex& x, int n) const;
     };
 }

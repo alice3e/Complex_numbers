@@ -13,7 +13,7 @@ Basic_operations::Complex::Complex(double x, double y) {
     Rez = x;
     Imz = y;
     // TODO: перевод в поляную систему доделать.
-    radius = sqrt( (pow(x,2) + pow(y,2) ) );
+    radius = sqrt( (std::pow(x,2) + std::pow(y,2) ) );
     double sin_thetha = sin(radius/Rez);
     double cos_thetha = sin(radius/Rez);
 
@@ -52,6 +52,29 @@ Basic_operations::Complex Basic_operations::Complex::operator*(const Basic_opera
     return Basic_operations::Complex{  ((Rez*x.Rez) - (Imz * x.Imz))  ,  ( (Rez*x.Imz) + (Imz * x.Rez) )  };
 }
 Basic_operations::Complex Basic_operations::Complex::operator/(const Basic_operations::Complex &x) const {
-    double denominator = pow(x.Rez,2) + pow(x.Imz,2); // знаменатель с^2 + d^2
+    double denominator = std::pow(x.Rez,2) + std::pow(x.Imz,2); // знаменатель с^2 + d^2
     return Basic_operations::Complex{ (((Rez*x.Rez) + (Imz * x.Imz))/denominator) , ( ( (Imz * x.Rez) - (Rez*x.Imz) )/denominator) };
 }
+
+// ERROR!!! НЕ РАБОТАЕТ!
+
+/*
+Basic_operations::Complex Basic_operations::Complex::pow(const Basic_operations::Complex &x, int n) const {
+    // TODO: СДЕЛАТЬ БИНАРНОЕ ВОЗВЕДЕНИЕ В СТЕПЕНЬ ЧИСЛА
+    Complex result(1,0);
+    bool flag = true;
+    if(n==0) return Complex(0,0);
+    else if(n<0){
+        n = -1*n;
+        flag = false;
+    }
+    for(int i = 0;i < n; i++){
+        result = result * x;
+    }
+    if(flag){
+        return result;
+    }else{
+        return (Complex(1,0)/result);
+    }
+}
+*/

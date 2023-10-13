@@ -14,5 +14,8 @@ int main() {
     std::cout << "x-y:  "<< (x-y).Normal_form() << std::endl; // WORKS
     std::cout << "x*y:  "<< (x*y).Normal_form() << std::endl; // WORKS
     std::cout << "x/y:  "<< (x/y).Normal_form() << std::endl; // WORKS
+
+    // НЕ РАБОТАЕТ!!!
+    //Basic_operations::Complex z = Basic_operations::Complex::pow(x,3);
     std::cout << "End of test section" << std::endl;
 }
