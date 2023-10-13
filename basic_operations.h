@@ -18,7 +18,7 @@ namespace Basic_operations{
         double angle;
 
     public:
-        Complex(double x = 1, double y = 0); // объявляем конструктор
+        Complex(double x = 1, double y = 0); // объявляем конструктор по умолчанию просто 1
 
         // Объявляем 2 функции для чтения полей и для красивого вывода числа (x;iy)
         //[[nodiscard]] - Этот атрибут используется, чтобы обозначить, что возвращаемое значение функции должно быть обязательно использовано при вызове:
@@ -31,7 +31,7 @@ namespace Basic_operations{
         Complex operator-(const Complex& x) const;
         Complex operator*(const Complex& x) const;
         Complex operator/(const Complex& x) const;
-        [[nodiscard]] Complex pow(const Complex& x, int n) const;
-        Complex conjugate() const;
+        [[nodiscard]] Basic_operations::Complex pow(int n); // Возведение в степень x.pow(3) -> x^3
+        Complex conjugate() const; // Комплексно сопряженное
     };
 }

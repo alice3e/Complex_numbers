@@ -51,6 +51,7 @@ Basic_operations::Complex Basic_operations::Complex::operator-(const Basic_opera
 Basic_operations::Complex Basic_operations::Complex::operator*(const Basic_operations::Complex &x) const {
     return Basic_operations::Complex{  ((Rez*x.Rez) - (Imz * x.Imz))  ,  ( (Rez*x.Imz) + (Imz * x.Rez) )  };
 }
+
 Basic_operations::Complex Basic_operations::Complex::operator/(const Basic_operations::Complex &x) const {
     double denominator = std::pow(x.Rez,2) + std::pow(x.Imz,2); // знаменатель с^2 + d^2
     return Basic_operations::Complex{ (((Rez*x.Rez) + (Imz * x.Imz))/denominator) , ( ( (Imz * x.Rez) - (Rez*x.Imz) )/denominator) };
@@ -65,26 +66,23 @@ Basic_operations::Complex Basic_operations::Complex::conjugate() const{
     return result;
 }
 
-
-// ERROR!!! НЕ РАБОТАЕТ!
-
-/*
-Basic_operations::Complex Basic_operations::Complex::pow(const Basic_operations::Complex &x, int n) const {
-    // TODO: СДЕЛАТЬ БИНАРНОЕ ВОЗВЕДЕНИЕ В СТЕПЕНЬ ЧИСЛА
-    Complex result(1,0);
+Basic_operations::Complex Basic_operations::Complex::pow(int n) {
+    Complex result(1, 0);
     bool flag = true;
-    if(n==0) return Complex(0,0);
-    else if(n<0){
-        n = -1*n;
+    if (n == 0) return Complex(1, 0);
+    else if (n < 0) {
+        n = -n;
         flag = false;
     }
-    for(int i = 0;i < n; i++){
-        result = result * x;
+    Complex base(*this);  // Create a copy of the current complex number
+    for (int i = 0; i < n; i++) {
+        result = result * base;
     }
-    if(flag){
+    if (flag) {
         return result;
-    }else{
-        return (Complex(1,0)/result);
+    }
+    else {
+        return Complex(1, 0) / result;
     }
 }
-*/
+
