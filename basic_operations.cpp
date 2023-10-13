@@ -32,7 +32,7 @@ std::string Basic_operations::Complex::Normal_form() const {
     double x = Rez,y = Imz;
 
     // TODO: Сделать вывод числа без нулей если оно целое + округление до 3ех знаков
-    if(y > 0){
+    if(y >= 0){
         out += "(" + std::to_string(x) + " + " + std::to_string(y) + "i)";
     }else{
         out += "(" + std::to_string(x) + " - " + std::to_string(y*-1) + "i)";
@@ -55,6 +55,16 @@ Basic_operations::Complex Basic_operations::Complex::operator/(const Basic_opera
     double denominator = std::pow(x.Rez,2) + std::pow(x.Imz,2); // знаменатель с^2 + d^2
     return Basic_operations::Complex{ (((Rez*x.Rez) + (Imz * x.Imz))/denominator) , ( ( (Imz * x.Rez) - (Rez*x.Imz) )/denominator) };
 }
+
+Basic_operations::Complex Basic_operations::Complex::conjugate() const{
+    // conjugate == not(z)
+    // z + not(z) = Rez(z) ; not(not(z)) = z ; z * not(z) = Rez^2 + Imz^2
+    Complex result;
+    result.Rez = Rez;
+    result.Imz = Imz*(-1);
+    return result;
+}
+
 
 // ERROR!!! НЕ РАБОТАЕТ!
 
