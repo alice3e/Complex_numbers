@@ -23,24 +23,36 @@ double BasicOperations::Complex::GetReZ() const {
 }
 
 std::string BasicOperations::Complex::Normal_form() const {
-    std::string out;
     double x = Rez, y = Imz;
-    std::cout.setf(std::ios::fixed);
-    std::cout.precision(3);
-    // TODO: Сделать вывод числа без нулей округленное до 3х знаков
-    if (x - int(x) == 0 && y - int(y) == 0){
-        if (y >= 0) {
-            out += "(" + std::to_string(int(x)) + " + " + std::to_string(int(y)) + "i)";
-        } else {
-            out += "(" + std::to_string(int(x)) + " - " + std::to_string(int(y) * -1) + "i)";
+    std::string out, sig;
+    std::string xstr = std::to_string(x), ystr = std::to_string(y);
+    y >= 0 ? sig = '+' : sig = '-';
+
+    std::string yline, xline;
+    int n = xstr.size(), m = ystr.size();
+    for (int i = 0; i < n; ++i) {
+        if (xstr[i] == '.') {
+            n = i + 3;
         }
-    } else {
-        if (y >= 0) {
-            out += "(" + std::to_string(x) + " + " + std::to_string(y) + "i)";
-        } else {
-            out += "(" + std::to_string(x) + " - " + std::to_string(y * -1) + "i)";
+        if (xstr[i] == '.' && xstr[i + 1] == '0') {
+            break;
+        }
+        xline += xstr[i];
+    }
+    for (int i = 0; i < m; ++i) {
+        if (ystr[i] == '.') {
+            m = i + 3;
+        }
+        if (ystr[i] == '.' && ystr[i + 1] == '0') {
+            break;
+        }
+        if (ystr[i] != '-') {
+            yline += ystr[i];
         }
     }
+
+    out += "(" + xline + " " + sig + " " + yline + "i)";
+
     return out;
 }
 
