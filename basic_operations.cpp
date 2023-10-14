@@ -1,15 +1,10 @@
-//
-// Created by alicee on 13.10.2023.
-//
-#include "basic_operations.h"
+#include<iomanip>
 
-void Basic_operations::test_function() {
-    std::cout << "Hello from namespace basic_operations" << std::endl;
-}
+#include "basic_operations.h"
 
 // Эта функция будет автоматически вызываться при создании обьекта класса
 // В будущем можно сдесь различные проверки или автоматический перевод в Триг. форму сделать
-Basic_operations::Complex::Complex(double x, double y) {
+BasicOperations::Complex::Complex(double x, double y) {
     Rez = x;
     Imz = y;
     // TODO: перевод в поляную систему доделать.
@@ -19,45 +14,66 @@ Basic_operations::Complex::Complex(double x, double y) {
 
 }
 
-double Basic_operations::Complex::GetImz() const {
+double BasicOperations::Complex::GetImz() const {
     return Imz;
 }
 
-double Basic_operations::Complex::GetReZ() const {
+double BasicOperations::Complex::GetReZ() const {
     return Rez;
 }
 
-std::string Basic_operations::Complex::Normal_form() const {
-    std::string out;
-    double x = Rez,y = Imz;
+std::string BasicOperations::Complex::Normal_form() const {
+    double x = Rez, y = Imz;
+    std::string out, sig;
+    std::string xstr = std::to_string(x), ystr = std::to_string(y);
+    y >= 0 ? sig = '+' : sig = '-';
 
-    // TODO: Сделать вывод числа без нулей если оно целое + округление до 3ех знаков
-    if(y >= 0){
-        out += "(" + std::to_string(x) + " + " + std::to_string(y) + "i)";
-    }else{
-        out += "(" + std::to_string(x) + " - " + std::to_string(y*-1) + "i)";
+    std::string yline, xline;
+    int n = xstr.size(), m = ystr.size();
+    for (int i = 0; i < n; ++i) {
+        if (xstr[i] == '.') {
+            n = i + 3;
+        }
+        if (xstr[i] == '.' && xstr[i + 1] == '0') {
+            break;
+        }
+        xline += xstr[i];
     }
+    for (int i = 0; i < m; ++i) {
+        if (ystr[i] == '.') {
+            m = i + 3;
+        }
+        if (ystr[i] == '.' && ystr[i + 1] == '0') {
+            break;
+        }
+        if (ystr[i] != '-') {
+            yline += ystr[i];
+        }
+    }
+
+    out += "(" + xline + " " + sig + " " + yline + "i)";
+
     return out;
 }
 
-Basic_operations::Complex Basic_operations::Complex::operator+(const Basic_operations::Complex &x) const {
-    return Basic_operations::Complex{Rez+x.Rez,Imz+x.Imz};
+BasicOperations::Complex BasicOperations::Complex::operator+(const BasicOperations::Complex &x) const {
+    return BasicOperations::Complex{Rez+x.Rez,Imz+x.Imz};
 }
 
-Basic_operations::Complex Basic_operations::Complex::operator-(const Basic_operations::Complex &x) const {
-    return Basic_operations::Complex{Rez-x.Rez,Imz-x.Imz};
+BasicOperations::Complex BasicOperations::Complex::operator-(const BasicOperations::Complex &x) const {
+    return BasicOperations::Complex{Rez-x.Rez,Imz-x.Imz};
 }
 
-Basic_operations::Complex Basic_operations::Complex::operator*(const Basic_operations::Complex &x) const {
-    return Basic_operations::Complex{  ((Rez*x.Rez) - (Imz * x.Imz))  ,  ( (Rez*x.Imz) + (Imz * x.Rez) )  };
+BasicOperations::Complex BasicOperations::Complex::operator*(const BasicOperations::Complex &x) const {
+    return BasicOperations::Complex{  ((Rez*x.Rez) - (Imz * x.Imz))  ,  ( (Rez*x.Imz) + (Imz * x.Rez) )  };
 }
 
-Basic_operations::Complex Basic_operations::Complex::operator/(const Basic_operations::Complex &x) const {
+BasicOperations::Complex BasicOperations::Complex::operator/(const BasicOperations::Complex &x) const {
     double denominator = std::pow(x.Rez,2) + std::pow(x.Imz,2); // знаменатель с^2 + d^2
-    return Basic_operations::Complex{ (((Rez*x.Rez) + (Imz * x.Imz))/denominator) , ( ( (Imz * x.Rez) - (Rez*x.Imz) )/denominator) };
+    return BasicOperations::Complex{ (((Rez*x.Rez) + (Imz * x.Imz))/denominator) , ( ( (Imz * x.Rez) - (Rez*x.Imz) )/denominator) };
 }
 
-Basic_operations::Complex Basic_operations::Complex::conjugate() const{
+BasicOperations::Complex BasicOperations::Complex::conjugate() const{
     // conjugate == not(z)
     // z + not(z) = Rez(z) ; not(not(z)) = z ; z * not(z) = Rez^2 + Imz^2
     Complex result;
@@ -66,7 +82,7 @@ Basic_operations::Complex Basic_operations::Complex::conjugate() const{
     return result;
 }
 
-Basic_operations::Complex Basic_operations::Complex::pow(int n) {
+BasicOperations::Complex BasicOperations::Complex::pow(int n) {
     Complex result(1, 0);
     bool flag = true;
     if (n == 0) return Complex(1, 0);
