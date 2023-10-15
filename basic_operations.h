@@ -1,9 +1,9 @@
 #pragma once
 
 #include <iostream>
-#include <math.h>
+#include <cmath>
 #include <string>
-
+#include<iomanip>
 
 namespace BasicOperations{
 
@@ -14,7 +14,11 @@ namespace BasicOperations{
         double Imz;
         // Polar coordinates
         double radius;
-        double angle;
+        double theta; // radians (0 - 2Pi)
+        double angle; // degrees (0 - 360)
+        double sin_theta;
+        double cos_theta;
+        double theta_asin;
 
     public:
         Complex(double x = 1, double y = 0); // объявляем конструктор по умолчанию просто 1
@@ -23,6 +27,10 @@ namespace BasicOperations{
         //[[nodiscard]] - Этот атрибут используется, чтобы обозначить, что возвращаемое значение функции должно быть обязательно использовано при вызове:
         [[nodiscard]] double GetReZ() const;
         [[nodiscard]] double GetImz() const;
+        [[nodiscard]] double GetTheta() const;
+        [[nodiscard]] double GetAngle() const;
+        [[nodiscard]] double GetSin() const;
+        [[nodiscard]] double GetCos() const;
         [[nodiscard]] std::string Normal_form() const;
 
         // Простейшие операции

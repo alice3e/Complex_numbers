@@ -1,5 +1,3 @@
-#include<iomanip>
-
 #include "basic_operations.h"
 
 // Эта функция будет автоматически вызываться при создании обьекта класса
@@ -9,9 +7,13 @@ BasicOperations::Complex::Complex(double x, double y) {
     Imz = y;
     // TODO: перевод в поляную систему доделать.
     radius = sqrt( (std::pow(x,2) + std::pow(y,2) ) );
-    double sin_thetha = sin(radius/Rez);
-    double cos_thetha = sin(radius/Rez);
-
+    sin_theta = sin(Rez/radius);
+    cos_theta = sin(Imz/radius);
+    theta_asin = std::asin(sin_theta);
+    if(cos_theta < 0) theta_asin += 0.5;
+    while(theta_asin < 0) theta_asin += 2; // Чтобы всегда положительный  угол был
+    theta = fmod(theta_asin,(2*M_PI)); // Остаток от деления на 2*Pi
+    angle = (theta*180)/M_PI;
 }
 
 double BasicOperations::Complex::GetImz() const {
@@ -20,6 +22,22 @@ double BasicOperations::Complex::GetImz() const {
 
 double BasicOperations::Complex::GetReZ() const {
     return Rez;
+}
+
+double BasicOperations::Complex::GetTheta() const {
+    return theta;
+}
+
+double BasicOperations::Complex::GetAngle() const {
+    return angle;
+}
+
+double BasicOperations::Complex::GetSin() const {
+    return sin_theta;
+}
+
+double BasicOperations::Complex::GetCos() const {
+    return cos_theta;
 }
 
 std::string BasicOperations::Complex::Normal_form() const {
