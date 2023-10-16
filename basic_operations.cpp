@@ -6,7 +6,7 @@ BasicOperations::Complex::Complex(double x, double y) {
     Rez = x;
     Imz = y;
     // TODO: перевод в поляную систему доделать.
-    radius = sqrt( (std::pow(x,2) + std::pow(y,2) ) );
+    radius = std::sqrt( (std::pow(x,2) + std::pow(y,2) ) );
     sin_theta = sin(Rez/radius);
     cos_theta = sin(Imz/radius);
     theta_asin = std::asin(sin_theta);
@@ -120,3 +120,6 @@ BasicOperations::Complex BasicOperations::Complex::pow(int n) {
     }
 }
 
+//BasicOperations::Complex BasicOperations::Complex::sqrt() {
+//
+//}

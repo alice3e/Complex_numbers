@@ -1,5 +1,8 @@
 #pragma once
 
+#include <iostream>
+
 namespace IOComplexNumbers {
-    void input();
+    int menu();
+    void main_console();
 }

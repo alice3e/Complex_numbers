@@ -40,6 +40,7 @@ namespace BasicOperations{
         Complex operator*(const Complex& x) const;
         Complex operator/(const Complex& x) const;
         [[nodiscard]] BasicOperations::Complex pow(int n); // Возведение в степень x.pow(3) -> x^3
+        [[nodiscard]] BasicOperations::Complex sqrt();
         Complex conjugate() const; // Комплексно сопряженное
     };
 }
