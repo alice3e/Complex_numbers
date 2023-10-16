@@ -1,10 +1,10 @@
-#include "io_complex_numbers.h"
-#include "basic_operations.h"
+#include "iocomplex.h"
+#include "assy_complex.h"
 
-BasicOperations::Complex x(-4,0);
-BasicOperations::Complex y(-2,1);
+ASSY::Complex x(-4,0);
+ASSY::Complex y(-2,1);
 
-int IOComplexNumbers::menu() {
+int IOComplex::menu() {
     int answer;
     std::cout << "\n1 - Сложить\n"
          << "2 - Вычесть\n"
@@ -17,9 +17,9 @@ int IOComplexNumbers::menu() {
     return answer;
 }
 
-void IOComplexNumbers::main_console() {
-    std::cout << "x:    "<< x.Normal_form() << std::endl;
-    std::cout << "y:    "<< y.Normal_form() << std::endl;
+void IOComplex::main_console() {
+    std::cout << "x:    "<< x.to_string() << std::endl;
+    std::cout << "y:    "<< y.to_string()<< std::endl;
     int ans;
     while(ans != 0) {
         ans = menu();
@@ -27,16 +27,16 @@ void IOComplexNumbers::main_console() {
             case 0:
                 break;
             case 1:
-                std::cout << "x+y:  " << (x + y).Normal_form() << std::endl;
+                std::cout << "x+y:  " << (x + y).to_string() << std::endl;
                 break;
             case 2:
-                std::cout << "x-y:  " << (x - y).Normal_form() << std::endl;
+                std::cout << "x-y:  " << (x - y).to_string() << std::endl;
                 break;
             case 3:
-                std::cout << "x*y:  " << (x * y).Normal_form() << std::endl;
+                std::cout << "x*y:  " << (x * y).to_string() << std::endl;
                 break;
             case 4:
-                std::cout << "x/y:  " << (x / y).Normal_form() << std::endl;
+                std::cout << "x/y:  " << (x / y).to_string() << std::endl;
                 break;
 
         }

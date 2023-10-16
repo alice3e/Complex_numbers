@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-namespace IOComplexNumbers {
+namespace IOComplex {
     int menu();
     void main_console();
 }
