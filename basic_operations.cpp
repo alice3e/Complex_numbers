@@ -1,7 +1,5 @@
 #include "basic_operations.h"
 
-#include <cmath>
-
 TFCV::Complex::Complex(double x, double y) {
     // TODO: Нет проверки на ошибки входных данных
     re = x;
