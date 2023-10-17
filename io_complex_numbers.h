@@ -9,7 +9,7 @@ namespace IOComplex {
     int get_user_y_menu_action();
     void print_example_result(
         const char* const comment,
-        const BasicOperations::Complex& result
+        const TFCV::Complex& result
     );
     void process_menu_action();
     void show_main_menu();

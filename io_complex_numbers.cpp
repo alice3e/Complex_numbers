@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-BasicOperations::Complex x(-4,0);
-BasicOperations::Complex y(-2,1);
+TFCV::Complex x(-4,0);
+TFCV::Complex y(-2,1);
 
 int IOComplex::get_user_main_menu_action() {
     std::cout << std::endl;
@@ -43,10 +43,10 @@ int IOComplex::get_user_y_menu_action() {
 
 void IOComplex::print_example_result(
     const char* const comment,
-    const BasicOperations::Complex& result
+    const TFCV::Complex& result
 ) {
     const char format[] = " = ";
-    std::cout << comment << format << result.Normal_form() << std::endl;
+    std::cout << comment << format << result.to_string() << std::endl;
 }
 
 void IOComplex::process_menu_action() {
