@@ -1,125 +1,119 @@
 #include "basic_operations.h"
 
-// Эта функция будет автоматически вызываться при создании обьекта класса
-// В будущем можно сдесь различные проверки или автоматический перевод в Триг. форму сделать
-BasicOperations::Complex::Complex(double x, double y) {
-    Rez = x;
-    Imz = y;
+#include <cmath>
+
+TFCV::Complex::Complex(double x, double y) {
+    // TODO: Нет проверки на ошибки входных данных
+    re = x;
+    im = y;
+
     // TODO: перевод в поляную систему доделать.
-    radius = std::sqrt( (std::pow(x,2) + std::pow(y,2) ) );
-    sin_theta = sin(Rez/radius);
-    cos_theta = sin(Imz/radius);
+    radius = std::sqrt(std::pow(x, 2) + std::pow(y, 2));
+    sin_theta = sin(re / radius);
+    cos_theta = sin(im / radius);
     theta_asin = std::asin(sin_theta);
-    if(cos_theta < 0) theta_asin += 0.5;
-    while(theta_asin < 0) theta_asin += 2; // Чтобы всегда положительный  угол был
-    theta = fmod(theta_asin,(2*M_PI)); // Остаток от деления на 2*Pi
-    angle = (theta*180)/M_PI;
+
+    if (cos_theta < 0) {
+        theta_asin += 0.5;
+    }
+    while (theta_asin < 0) {
+        // Рассматриваем всегда положительный угол
+        theta_asin += 2;
+    }
+
+    theta = fmod(theta_asin, 2 * M_PI);
+    angle = (theta * 180) / M_PI;
 }
 
-double BasicOperations::Complex::GetImz() const {
-    return Imz;
-}
+double TFCV::Complex::get_im() const { return im; }
+double TFCV::Complex::get_re() const { return re; }
+double TFCV::Complex::get_theta() const { return theta; }
+double TFCV::Complex::get_angle() const { return angle; }
+double TFCV::Complex::get_sin() const { return sin_theta; }
+double TFCV::Complex::get_cos() const { return cos_theta; }
 
-double BasicOperations::Complex::GetReZ() const {
-    return Rez;
-}
+std::string TFCV::Complex::to_string() const {
+    std::string xstr = std::to_string(re);
+    std::string ystr = std::to_string(im);
+    int n = xstr.size();
+    int m = ystr.size();
+    std::string xline, yline;
 
-double BasicOperations::Complex::GetTheta() const {
-    return theta;
-}
+    const char dot = '.';
+    const char minus = '-';
+    const char plus = '+';
+    const char zero = '0';
 
-double BasicOperations::Complex::GetAngle() const {
-    return angle;
-}
-
-double BasicOperations::Complex::GetSin() const {
-    return sin_theta;
-}
-
-double BasicOperations::Complex::GetCos() const {
-    return cos_theta;
-}
-
-std::string BasicOperations::Complex::Normal_form() const {
-    double x = Rez, y = Imz;
-    std::string out, sig;
-    std::string xstr = std::to_string(x), ystr = std::to_string(y);
-    y >= 0 ? sig = '+' : sig = '-';
-
-    std::string yline, xline;
-    int n = xstr.size(), m = ystr.size();
     for (int i = 0; i < n; ++i) {
-        if (xstr[i] == '.') {
+        if (xstr[i] == dot) {
             n = i + 3;
         }
-        if (xstr[i] == '.' && xstr[i + 1] == '0') {
+        if (xstr[i] == dot && xstr[i + 1] == zero) {
             break;
         }
         xline += xstr[i];
     }
+
     for (int i = 0; i < m; ++i) {
-        if (ystr[i] == '.') {
+        if (ystr[i] == dot) {
             m = i + 3;
         }
-        if (ystr[i] == '.' && ystr[i + 1] == '0') {
+        if (ystr[i] == dot && ystr[i + 1] == zero) {
             break;
         }
-        if (ystr[i] != '-') {
+        if (ystr[i] != minus) {
             yline += ystr[i];
         }
     }
 
-    out += "(" + xline + " " + sig + " " + yline + "i)";
+    const char sig = im >= 0 ? plus : minus;
+    const char space = ' ';
 
-    return out;
+    return "(" + xline + space + sig + space + yline + "i)";
 }
 
-BasicOperations::Complex BasicOperations::Complex::operator+(const BasicOperations::Complex &x) const {
-    return BasicOperations::Complex{Rez+x.Rez,Imz+x.Imz};
+TFCV::Complex TFCV::Complex::operator + (const TFCV::Complex &z) const {
+    return {re + z.re, im + z.im};
 }
 
-BasicOperations::Complex BasicOperations::Complex::operator-(const BasicOperations::Complex &x) const {
-    return BasicOperations::Complex{Rez-x.Rez,Imz-x.Imz};
+TFCV::Complex TFCV::Complex::operator - (const TFCV::Complex &z) const {
+    return {re - z.re, im - z.im};
 }
 
-BasicOperations::Complex BasicOperations::Complex::operator*(const BasicOperations::Complex &x) const {
-    return BasicOperations::Complex{  ((Rez*x.Rez) - (Imz * x.Imz))  ,  ( (Rez*x.Imz) + (Imz * x.Rez) )  };
+TFCV::Complex TFCV::Complex::operator * (const TFCV::Complex &z) const {
+    return {re * z.re - im * z.im, re * z.im + im * z.re};
 }
 
-BasicOperations::Complex BasicOperations::Complex::operator/(const BasicOperations::Complex &x) const {
-    double denominator = std::pow(x.Rez,2) + std::pow(x.Imz,2); // знаменатель с^2 + d^2
-    return BasicOperations::Complex{ (((Rez*x.Rez) + (Imz * x.Imz))/denominator) , ( ( (Imz * x.Rez) - (Rez*x.Imz) )/denominator) };
+TFCV::Complex TFCV::Complex::operator / (const TFCV::Complex &z) const {
+    // знаменатель = с^2 + d^2
+    const double denominator = std::pow(z.re, 2) + std::pow(z.im, 2);
+    const double x = (re * z.re + im * z.im) / denominator;
+    const double y = (im * z.re - re * z.im) / denominator;
+    return {x, y};
 }
 
-BasicOperations::Complex BasicOperations::Complex::conjugate() const{
-    // conjugate == not(z)
-    // z + not(z) = Rez(z) ; not(not(z)) = z ; z * not(z) = Rez^2 + Imz^2
-    Complex result;
-    result.Rez = Rez;
-    result.Imz = Imz*(-1);
-    return result;
+TFCV::Complex TFCV::conjugate(const Complex &z) {
+    return {z.get_re(), -z.get_im()};
 }
 
-BasicOperations::Complex BasicOperations::Complex::pow(int n) {
+TFCV::Complex TFCV::pow(const Complex &z, int n) {
     Complex result(1, 0);
     bool flag = true;
-    if (n == 0) return Complex(1, 0);
+
+    if (n == 0) return {1, 0};
     else if (n < 0) {
         n = -n;
         flag = false;
     }
-    Complex base(*this);  // Create a copy of the current complex number
+
+    Complex base(z);
     for (int i = 0; i < n; i++) {
         result = result * base;
     }
+
     if (flag) {
         return result;
-    }
-    else {
+    } else {
         return Complex(1, 0) / result;
     }
 }
-
-//BasicOperations::Complex BasicOperations::Complex::sqrt() {
-//
-//}
