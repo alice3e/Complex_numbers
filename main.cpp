@@ -3,7 +3,7 @@
 
 int main() {
     setlocale(LC_ALL, "Russian");
-    IOComplexNumbers::main_console();
+    IOComplex::process_menu_action();
 //    std::cout << "x:    "<< x.Normal_form() << std::endl;     // WORKS
 //    std::cout << "x_theta :    "<< x.GetTheta() << std::endl;     // WORKS
 //    std::cout << "x_angle :    "<< x.GetAngle() << std::endl;     // WORKS
