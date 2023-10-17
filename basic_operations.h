@@ -1,46 +1,47 @@
 #pragma once
 
-#include <iostream>
-#include <cmath>
 #include <string>
-#include<iomanip>
 
-namespace BasicOperations{
+namespace TheoryOfFunctionOfComplexVariable {
 
-    class Complex{
+    class Complex {
     private:
         // Cartesian plane
-        double Rez;
-        double Imz;
+        double re;
+        double im;
+
         // Polar coordinates
+        // radians (0 - 2Pi)
+        // degrees (0 - 360)
         double radius;
-        double theta; // radians (0 - 2Pi)
-        double angle; // degrees (0 - 360)
+        double theta;
+        double angle;
+
         double sin_theta;
         double cos_theta;
         double theta_asin;
 
     public:
-        Complex(double x = 1, double y = 0); // объявляем конструктор по умолчанию просто 1
+        Complex(double x, double y);
 
+        [[nodiscard]] double get_re() const;
+        [[nodiscard]] double get_im() const;
+        [[nodiscard]] double get_theta() const;
+        [[nodiscard]] double get_angle() const;
+        [[nodiscard]] double get_sin() const;
+        [[nodiscard]] double get_cos() const;
 
-        // Объявляем 2 функции для чтения полей и для красивого вывода числа (x;iy)
-        //[[nodiscard]] - Этот атрибут используется, чтобы обозначить, что возвращаемое значение функции должно быть обязательно использовано при вызове:
-        [[nodiscard]] double GetReZ() const;
-        [[nodiscard]] double GetImz() const;
-        [[nodiscard]] double GetTheta() const;
-        [[nodiscard]] double GetAngle() const;
-        [[nodiscard]] double GetSin() const;
-        [[nodiscard]] double GetCos() const;
-        [[nodiscard]] std::string Normal_form() const;
+        [[nodiscard]] std::string to_string() const;
 
-        // Простейшие операции
-        Complex operator+(const Complex& x) const;
-        Complex operator-(const Complex& x) const;
-        Complex operator*(const Complex& x) const;
-        Complex operator/(const Complex& x) const;
-        [[nodiscard]] BasicOperations::Complex pow(int n); // Возведение в степень x.pow(3) -> x^3
-        [[nodiscard]] BasicOperations::Complex sqrt();
-        Complex conjugate() const; // Комплексно сопряженное
+        Complex operator + (const Complex &z) const;
+        Complex operator - (const Complex &z) const;
+        Complex operator * (const Complex &z) const;
+        Complex operator / (const Complex &z) const;
     };
+
+    Complex conjugate(const Complex &z);
+    Complex pow(const Complex &z, int n);
+    Complex sqrt(const Complex &z);
 }
+
+namespace TFCV = TheoryOfFunctionOfComplexVariable;
