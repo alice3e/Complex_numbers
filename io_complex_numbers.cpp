@@ -94,16 +94,16 @@ void IOComplex::process_menu_action() {
                             print_example_result("x", x);
                             break;
                         case 2:
-                            std::cout << "x_theta : "<< x.GetTheta() << std::endl;
+                            std::cout << "x_theta : "<< x.get_theta() << std::endl;
                             break;
                         case 3:
-                            std::cout << "x_angle : "<< x.GetAngle() << std::endl;
+                            std::cout << "x_angle : "<< x.get_angle() << std::endl;
                             break;
                         case 4:
-                            std::cout << "x_cos: " << x.GetCos() << std::endl;
+                            std::cout << "x_cos: " << x.get_cos() << std::endl;
                             break;
                         case 5:
-                            std::cout << "x_sin: "<< x.GetSin() << std::endl;
+                            std::cout << "x_sin: "<< x.get_sin() << std::endl;
                             break;
                         default:
                             break;
@@ -119,16 +119,16 @@ void IOComplex::process_menu_action() {
                             print_example_result("y", x);
                             break;
                         case 2:
-                            std::cout << "y_theta : "<< y.GetTheta() << std::endl;
+                            std::cout << "y_theta : "<< y.get_theta() << std::endl;
                             break;
                         case 3:
-                            std::cout << "y_angle : "<< y.GetAngle() << std::endl;
+                            std::cout << "y_angle : "<< y.get_angle() << std::endl;
                             break;
                         case 4:
-                            std::cout << "y_cos: " << y.GetCos() << std::endl;
+                            std::cout << "y_cos: " << y.get_cos() << std::endl;
                             break;
                         case 5:
-                            std::cout << "y_sin: "<< y.GetSin() << std::endl;
+                            std::cout << "y_sin: "<< y.get_sin() << std::endl;
                             break;
                         default:
                             break;
