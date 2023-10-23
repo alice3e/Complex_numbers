@@ -109,6 +109,10 @@ void IOComplex::process_menu_action() {
                         case 5:
                             std::cout << "x_sin: "<< x.get_sin() << std::endl;
                             break;
+                        case 6:
+                            std::cout << "Степень n = ";
+                            int n; std::cin >> n;
+                            print_example_result("x^n", pow(x, n));
                         default:
                             break;
                     }
@@ -134,6 +138,10 @@ void IOComplex::process_menu_action() {
                         case 5:
                             std::cout << "y_sin: "<< y.get_sin() << std::endl;
                             break;
+                        case 6:
+                            std::cout << "Степень n = ";
+                            int n; std::cin >> n;
+                            print_example_result("y^n", pow(y, n));
                         default:
                             break;
                     }
@@ -171,6 +179,7 @@ void IOComplex::show_number_menu(
               << "3 - Угол в градусах " << comment << '\n'
               << "4 - Косинус " << comment << '\n'
               << "5 - Синус " << comment << '\n'
+              << "6 - " << comment << " Возведение в степень n " << '\n'
               << "0 - " << last_section << '\n'
               << "> ";
 }
